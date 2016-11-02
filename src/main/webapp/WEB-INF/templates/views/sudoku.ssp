@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wiebes Sudoku Solver</title>
+<meta name="author" content="Wiebe Hordijk">
+<meta charset="UTF-8">
+<meta name="description" content="Solves any sudoku puzzle that has a solution">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/sudoku.css">
+</head>
+<body>
+<section>
+<header>
+    <h1>Sudoku Solver</h1>
+    <p></p>
+<p>Enter the given numbers below</p>
+</header>
+<form action="solve">
+<table id="sudokuTable">
+#import(nl.wiebehordijk.sudokuweb._)
+    #import(nl.wiebehordijk.sudoku._)
+    <%@ val example: Matrix = Matrix.empty %>
+    <%@ val error: String = null %>
+#for (i <- 0 until SudokuSize)
+    <tr>
+        #for (j <- 0 until SudokuSize)
+            <td>
+                <input type="number" min="1" max="9" size="1" id="cell<%= i * SudokuSize + j %>"
+            name="cell<%= i * SudokuSize + j %>" value="<%= example(i, j) %>">
+            </td>
+        #end
+    </tr>
+#end
+</table>
+#if (error != null)
+<br>
+<p class="error"><%= error %></p>
+#end
+<br>
+<button type="submit" id="submitBtn">Solve</button>
+</form>
+<br>
+<p><a href="?example=Puzzle1">Example Puzzle 1</a></p>
+<p><a href="?example=Puzzle2">Example Puzzle 2</a></p>
+<p><a href="?example=Puzzle3">Example Puzzle 3 (no solutions)</a></p>
+<p><a href="?example=Puzzle4">Example Puzzle 4 (multiple solutions)</a></p>
+<p><a href="?example=Puzzle5">Example Puzzle 5</a></p>
+</section>
+</body>
+</html>

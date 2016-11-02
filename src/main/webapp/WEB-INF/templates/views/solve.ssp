@@ -1,0 +1,41 @@
+#import(nl.wiebehordijk.sudoku._)
+#import(nl.wiebehordijk.sudokuweb._)
+<%@ val solution: Matrix = Matrix.empty %>
+<%@ val multiple: Boolean = false %>
+<%@ val none: Boolean = false %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wiebes Sudoku Solver</title>
+<meta name="author" content="Wiebe Hordijk">
+<meta charset="UTF-8">
+<meta name="description" content="Solves any sudoku puzzle that has a solution">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/sudoku.css">
+</head>
+<body>
+    <section>
+        <header>
+            <h1>Sudoku Solver</h1>
+            <p>The solution is shown below:</p>
+        </header>
+            <table id="sudokuTable" class="solution">
+            #for (i <- 0 until SudokuSize)
+                <tr>
+                    #for (j <- 0 until SudokuSize)
+                        <td <%= if (solution(i, j).given) "class=given" %>><%= solution(i, j) %></td>
+                    #end
+                </tr>
+            #end
+            </table>
+            #if (multiple)
+                <p class="error">The puzzle has multiple solutions, we only show the first we found!</p>
+            #end
+            #if (none)
+                <p class="error">The puzzle has no solutions!</p>
+            #end
+        <br>
+    </section>
+</body>
+</html>

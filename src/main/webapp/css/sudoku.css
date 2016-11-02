@@ -1,0 +1,33 @@
+table {
+    border-collapse: collapse;
+}
+
+table, td {
+    border: 1px solid black;
+}
+
+td {
+    width: 3em;
+    text-align: center;
+}
+
+td.given {
+    font-weight: bold;
+}
+
+tr:nth-child(3n+0) td {
+    border-bottom: 3px solid black;
+}
+
+td:nth-child(3n+0) {
+    border-right: 3px solid black;
+}
+
+input {
+    width: 3em;
+    border: none;
+}
+
+.error {
+    color: red;
+}
