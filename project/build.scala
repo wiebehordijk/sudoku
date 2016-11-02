@@ -28,7 +28,8 @@ object SudokuBuild extends Build {
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "ch.qos.logback" % "logback-classic" % "1.1.5" % "runtime",
-        "org.eclipse.jetty" % "jetty-webapp" % "9.2.15.v20160210" % "container",
+        "org.eclipse.jetty" % "jetty-webapp" % "9.3.9.v20160517",
+        "org.eclipse.jetty" % "jetty-server" % "9.3.9.v20160517",
         "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile){ base =>
