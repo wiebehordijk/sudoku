@@ -9,3 +9,5 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 libraryDependencies += "org.scalatra.scalate" %% "scalate-core" % "1.7.0"
 
 scalacOptions ++= Seq("-language:postfixOps")
+
+enablePlugins(JavaAppPackaging)
