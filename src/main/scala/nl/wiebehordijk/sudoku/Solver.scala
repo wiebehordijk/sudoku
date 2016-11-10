@@ -20,13 +20,13 @@ object Solver {
     * @return Stream of all solutions
     */
   def solve(m: Matrix): Stream[Matrix] = {
-      if (m.isSolution) Stream(m)
-      else if (m.isDeadEnd) Stream()
-      else fieldWithLeastAvailableValues(m) match {
-        case None => Stream()
-        case Some(field) =>
-          field.available.toStream flatMap(i => solve(m.fillIn(field, i)))
-      }
+    if (m.isSolution) Stream(m)
+    else if (m.isDeadEnd) Stream()
+    else fieldWithLeastAvailableValues(m) match {
+      case None => Stream()
+      case Some(field) =>
+        field.available.toStream flatMap (i => solve(m.fillIn(field, i)))
+    }
   }
 
 }

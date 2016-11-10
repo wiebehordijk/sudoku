@@ -39,6 +39,7 @@
 <br>
 <button type="submit" id="submitBtn">Solve</button>
 </form>
+<p id="errorText" class="error" style="display: none"></p>
 <br>
 <p><a href="?example=Puzzle1">Example Puzzle 1</a></p>
 <p><a href="?example=Puzzle2">Example Puzzle 2</a></p>
@@ -46,5 +47,7 @@
 <p><a href="?example=Puzzle4">Example Puzzle 4 (multiple solutions)</a></p>
 <p><a href="?example=Puzzle5">Example Puzzle 5</a></p>
 </section>
+
+<script src="scripts/sudoku.js"></script>
 </body>
 </html>

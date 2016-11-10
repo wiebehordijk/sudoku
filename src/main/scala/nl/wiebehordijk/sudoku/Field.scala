@@ -7,9 +7,7 @@ package nl.wiebehordijk.sudoku
   * @param filledIn Optional number that is filled in in the field
   * @param available The set of numbers that can still be entered in the field
   */
-case class Field(row: Int, col: Int, filledIn: Option[Int], available: Set[Int], given: Boolean = false) {
-
-  def this(row: Int, col: Int) = this(row, col, None, (1 to 9).toSet)
+case class Field(row: Int, col: Int, filledIn: Option[Int] = None, available: Set[Int] = (1 to 9).toSet, given: Boolean = false) {
 
   def without(n: Int): Field = Field(row, col, filledIn, available - n, given)
 
