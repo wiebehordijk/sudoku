@@ -185,10 +185,16 @@ function inputToMatrix() {
     var matrix = Matrix.prototype.empty();
     for (var row = 0; row < 9; row++) {
         for (var col = 0; col < 9; col++) {
-            var cell = $("#cell" + (row * 9 + col));
+            var cell = document.getElementById("cell" + (row * 9 + col));
             // Do not take intermediate solution values as given
-            if (cell.hasClass("given") && cell.val()) {
-                matrix = matrix.fillInGiven(new Field(row, col, cell.val()));
+            if (cell.classList.contains("given")) {
+                try {
+                    var value = parseInt(cell.value);
+                    if (value) matrix = matrix.fillInGiven(new Field(row, col, value));
+                }
+                catch(err) {
+                    console.log(err.message);
+                }
             }
         }
     }
@@ -199,35 +205,35 @@ function inputToMatrix() {
 function showMatrix(matrix) {
     for (var row = 0; row < 9; row++) {
         for (var col = 0; col < 9; col++) {
-            var cell = $("#cell" + (row * 9 + col));
-            cell.val(matrix.field(row, col).value);
-            cell.removeClass("step");
-            if (matrix.field(row, col).given) cell.addClass("given");
-            else cell.removeClass("given");
+            var cell = document.getElementById("cell" + (row * 9 + col));
+            cell.value = matrix.field(row, col).value;
+            cell.classList.remove("step");
+            if (matrix.field(row, col).given) cell.classList.add("given");
+            else cell.classList.remove("given");
         }
     }
 }
 
 // Shows an error message. Type can be 'success' or 'error'.
 function showMessage(message, type) {
-    const text = $("#" + type + "Text");
-    text.text(message);
-    text.fadeIn();
+    const text = document.getElementById(type + "Text");
+    text.innerText = message;
+    text.style.display = "block";
 }
 
 // Clears any error/success messages
 function clearMessage(type) {
-    const text = $("#" + type + "Text");
-    text.text("");
-    text.fadeOut();
+    const text = document.getElementById(type + "Text");
+    text.innerText = "";
+    text.style.display = "none";
 }
 
 // Shows an intermediate step
 function showStep(matrix, field, value) {
     showMatrix(matrix);
-    var cell = $("#cell" + (field.row * 9 + field.col));
-    cell.val(value);
-    cell.addClass("step");
+    var cell = document.getElementById("cell" + (field.row * 9 + field.col));
+    cell.value = value;
+    cell.classList.add("step");
 }
 
 // Advances the solution process by one step, shows the step, and shows an error or the solution if found
@@ -246,7 +252,11 @@ function solveStep(solver, timer) {
     }
 }
 
-// Starts the process of solving the puzzle with a delay between each two steps
+function getDelay() {
+    const delaySelector = document.getElementById("delay");
+    return Number(delaySelector.value);
+}
+
 function startSolve(e) {
     e.preventDefault();
     clearMessage("error");
@@ -255,8 +265,8 @@ function startSolve(e) {
     const solver = solve(matrix);
     const timer = setInterval(function() {
         solveStep(solver, timer);
-    }, $("#delay").val());
-    $("#stopBtn").click( function() {
+    }, getDelay());
+    document.getElementById("stopBtn").addEventListener("click", function(e) {
         clearInterval(timer);
     });
 }
@@ -292,20 +302,21 @@ var testPuzzles = {
 
 
 // Page initialization
-$(document).ready(function() {
 
-    // Handlers for the test puzzle links
-    $("a").click(function(e) {
+for (var i = 1; i <= 5; i++) {
+    const id = "testPuzzle" + i;
+    document.getElementById(id).addEventListener("click", function(e) {
         e.preventDefault();
-        const matrix = Matrix.prototype.fromStringWithPipes(testPuzzles[this.id]);
+        const matrix = Matrix.prototype.fromStringWithPipes(testPuzzles[id]);
         showMatrix(matrix);
     });
+}
 
-    // Handlers for the input fields in the matrix
-    $("input").on("input", function() {
-        guardInput(this);
+for (var i = 0; i < 9*9; i++) {
+    const cell = document.getElementById("cell" + i);
+    cell.addEventListener("input", function(e) {
+        guardInput(cell);
     });
+}
 
-    // Handler for the Solve button
-    $("#submitBtn").click(startSolve);
-});
+document.getElementById("submitBtn").addEventListener("click", startSolve);

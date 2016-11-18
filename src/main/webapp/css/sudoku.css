@@ -15,6 +15,11 @@ td.given {
     font-weight: bold;
 }
 
+input.given {
+    font-weight: bold;
+    color: blue;
+}
+
 tr:nth-child(3n+0) td {
     border-bottom: 3px solid black;
 }
@@ -24,10 +29,20 @@ td:nth-child(3n+0) {
 }
 
 input {
-    width: 3em;
+    width: 2.5em;
     border: none;
+    text-align: center;
 }
 
 .error {
     color: red;
+}
+
+.success {
+    color: blue;
+}
+
+input.step {
+    color: red;
+    background-color: lightGrey;
 }

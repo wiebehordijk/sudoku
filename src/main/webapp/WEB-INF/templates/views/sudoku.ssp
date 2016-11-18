@@ -7,6 +7,8 @@
 <meta name="description" content="Solves any sudoku puzzle that has a solution">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="css/sudoku.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="scripts/sudoku.js"></script>
 </head>
 <body>
 <section>
@@ -37,17 +39,24 @@
 <p class="error"><%= error %></p>
 #end
 <br>
+<label for="delay">Delay in miliseconds:</label>
+<select id="delay">
+    <option value="10">10 ms</option>
+    <option value="100">100 ms</option>
+    <option value="500" selected>500 ms</option>
+    <option value="1000">1000 ms</option>
+</select>
 <button type="submit" id="submitBtn">Solve</button>
+<button type="button" id="stopBtn">Stop</button>
 </form>
 <p id="errorText" class="error" style="display: none"></p>
+<p id="successText" class="success" style="display: none"></p>
 <br>
-<p><a href="?example=Puzzle1">Example Puzzle 1</a></p>
-<p><a href="?example=Puzzle2">Example Puzzle 2</a></p>
-<p><a href="?example=Puzzle3">Example Puzzle 3 (no solutions)</a></p>
-<p><a href="?example=Puzzle4">Example Puzzle 4 (multiple solutions)</a></p>
-<p><a href="?example=Puzzle5">Example Puzzle 5</a></p>
+<p><a id="testPuzzle1" href="?example=Puzzle1">Example Puzzle 1</a></p>
+<p><a id="testPuzzle2" href="?example=Puzzle2">Example Puzzle 2</a></p>
+<p><a id="testPuzzle3" href="?example=Puzzle3">Example Puzzle 3 (no solutions)</a></p>
+<p><a id="testPuzzle4" href="?example=Puzzle4">Example Puzzle 4 (multiple solutions)</a></p>
+<p><a id="testPuzzle5" href="?example=Puzzle5">Example Puzzle 5</a></p>
 </section>
-
-<script src="scripts/sudoku.js"></script>
 </body>
 </html>
